@@ -7,7 +7,6 @@ class Crawler:
         self.news_links = []
         self.news = []
         self.news_ids = []
-        self.data_load()
 
     def get_news(self):
         return self.news
@@ -18,6 +17,7 @@ class Crawler:
         self.crawl_news(self.news_ids)
 
     def get_news_links(self, naver_fin_home):
+        print("crawl naver fin home")
         response = requests.get(naver_fin_home)
         soup = BeautifulSoup(response.text, 'html.parser')
         news_list = soup.find('ul','newsList')
@@ -38,6 +38,7 @@ class Crawler:
 
     def crawl_news(self, news_ids):
         for id in news_ids:
+            print(f"[{id['article_id']}]crawl news!")
             response = requests.get(f'https://n.news.naver.com/mnews/article/{id['office_id']}/{id['article_id']}')
             soup = BeautifulSoup(response.text, 'html.parser')
             title = soup.find('h2',"media_end_head_headline").find('span').get_text()
