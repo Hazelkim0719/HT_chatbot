@@ -19,3 +19,11 @@ class FileLoader:
 
     def convert_str_to_json(data):
         return json.loads(data)
+
+    def append_json(self, filename, data):
+        result = []
+        with open(filename, 'r') as f:
+            result = json.load(f)
+        for d in data:
+            result.append(d)
+        self.write_json(filename, result)  

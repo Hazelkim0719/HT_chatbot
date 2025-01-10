@@ -45,4 +45,10 @@ class Crawler:
             article = soup.find('article', 'go_trans _article_content').get_text().replace("\n","")
             date = soup.find('span', 'media_end_head_info_datestamp_time _ARTICLE_DATE_TIME').attrs['data-date-time']
 
-            self.news.append({'title':title,'article':article,'date':date})
+            self.news.append({
+                'id':f"{id['office_id']}_{id['article_id']}",
+                'title':title,
+                'article':article,
+                'date':date, 
+                'url': f'https://n.news.naver.com/mnews/article/{id['office_id']}/{id['article_id']}'
+            })
