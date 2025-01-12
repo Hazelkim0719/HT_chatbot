@@ -31,7 +31,12 @@
 openai==1.59.6
 python-dotenv==0.20.0
 Flask==2.0.3
+Flask-Cors=5.0.0
 beautifulsoup4==4.12.3
 schedule==1.1.0
 requests==2.32.3
 ```
+--- 
+# Front requirements
+1. npm 설치 
+2. npm install axios

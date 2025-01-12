@@ -96,15 +96,12 @@ class KakaoSendMng():
         self.send_multi_greeting()
         for i in range(1,cnt+1):
             self.send_msg(i,'me')
-            #self.send_msg(i,'friend')
+            self.send_msg(i,'friend')
 
     def send_multi_greeting(self):
         self.send_greeting_text(0, 'me')
-        """
         for i in range(len(self.friend_list)):
-            self.send_greeting_text(i, 'friend')  
-        """
-        
+            self.send_greeting_text(i, 'friend') 
 
     def send_msg(self, i, who):
         data = self.make_data(self.gen_text(-i), self.gen_link(self.text[-i]["origin"]["url"]), "기사 확인")

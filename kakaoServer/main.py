@@ -27,9 +27,9 @@ def clean_file():
     f.cleanup_file('../generateData/data/dataset.json')
 
 if __name__ == '__main__':
-    """
+    
     schedule.every().day.at("00:00").do(clean_file)
-    time_table = ["08:00", "15:00", "20:38"]
+    time_table = ["08:00", "15:00"]
     log = Logging()
     for t in time_table:
         log.log(f"register schedule {t}")
@@ -38,5 +38,3 @@ if __name__ == '__main__':
     while True:
         schedule.run_pending()
         time.sleep(1)  # CPU 점유율을 낮추기 위해 짧은 대기 추가
-    """
-    schedule_fun()
