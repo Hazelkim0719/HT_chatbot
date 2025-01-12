@@ -1,0 +1,8 @@
+
+.content-info {
+    display: flex;
+    margin-top: 15px;
+    justify-content: space-between;
+    font-size: 14px;
+    color: #7f8c8d;
+}

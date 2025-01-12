@@ -1,0 +1,24 @@
+.content-annotation {
+  margin-top: 15px;
+}
+.content-annotation ul {
+  
+  list-style-type: none; /* 기본 점 대신 스타일 변경 */
+  padding-left: 0;
+  font-size: 16px;
+}
+
+.content-annotation li {
+  font-style: italic; /* 주석처럼 기울임체로 표시 */
+  margin-bottom: 10px;
+  padding-left: 20px;
+  position: relative;
+}
+
+.content-annotation li::before {
+  content: "●"; /* 주석 아이콘 또는 다른 기호 추가 */
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: #6c757d; /* 주석 아이콘 색상 */
+}

@@ -1,0 +1,21 @@
+.content-summary {
+    margin-bottom: 10px;
+    padding: 15px;
+  }
+
+.content-summary strong {
+    font-size: 18px;
+    font-weight: bold;
+    color: #648eb4;
+}
+
+.content-summary ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.content-summary li {
+    font-size: 15px;
+    color: #adadad;
+    margin-bottom: 8px;
+}
