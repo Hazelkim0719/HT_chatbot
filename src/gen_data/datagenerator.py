@@ -3,7 +3,7 @@ import os
 import time
 from crawl import Crawler
 from chatgpt import GPTLoader
-from fileloader import FileLoader
+from utils import FileLoader, Logging
 import json
 class DataGenerator:
     def __init__(self):
@@ -17,6 +17,7 @@ class DataGenerator:
 
         self.data_filename = "../data/dataset.json"
         self.file_loader = FileLoader()
+        self.log = Logging()
 
     def load_news(self):
         """crwaler를 통해 naver 뉴스를 모두 가져오는 함수\n
@@ -37,13 +38,14 @@ class DataGenerator:
         """
         data = []
         for i in range(cnt):
-            print(f"[{i+1}]call gpt..")
-            result = {"origin" : self.news[i]}
-            if i != 0 and i % 3 == 0:
-                print("Wait 80 seconds due to token limitation..")
-                time.sleep(80)
-            result['gpt'] = self.gpt.run_gpt(self.news[i])
-            data.append(result)
+            if i < len(self.news):
+                self.log.log(f"call gpt({i+1})..")
+                result = {"origin" : self.news[i]}
+                if i != 0 and i % 3 == 0:
+                    self.log.log("Wait 80 seconds due to token limitation..")
+                    time.sleep(80)
+                result['gpt'] = self.gpt.run_gpt(self.news[i])
+                data.append(result)
         return data
 
     def write_data(self, data):
@@ -53,7 +55,7 @@ class DataGenerator:
         Returns:
             None
         """
-        print("file save..")
+        self.log.log("file save..")
         if os.path.isfile(self.data_filename):
             self.file_loader.append_json(self.data_filename, data)
         else:
