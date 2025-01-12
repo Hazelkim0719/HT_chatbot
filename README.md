@@ -1,3 +1,4 @@
+# project overview
 1. Data source: API call from news website 
 2. process the data
 3. Use chatbot to translate into US slang 
@@ -13,6 +14,7 @@
 ```python src/gen_data/main.py```  
 &nbsp;
 &nbsp;
+&nbsp;
 # 카카오톡 인증  
 ## 1. kakao developer에 팀원 초대하기
 [링크](https://developers.kakao.com/console/app/1185992/config/member)에서 팀원 초대
@@ -21,7 +23,9 @@
 위 링크를 통해 사용자가 로그인한 후 약관 동의
 ## 3. tokens 발급
 2번까지 해도 사용자 추가가 되지만 혹시 안되면 KakaoLoginMng클래스의 load_tokens 함수를 참고하여 tokens 발급해보기
-
+&nbsp;
+&nbsp;
+&nbsp;
 # requirements 
 ```python==3.13
 openai==1.59.6
