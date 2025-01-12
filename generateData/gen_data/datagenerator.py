@@ -1,21 +1,23 @@
 from dotenv import load_dotenv
 import os
 import time
-from crawl import Crawler
-from chatgpt import GPTLoader
-from utils import FileLoader, Logging
+
+from .crawl import Crawler
+from .chatgpt import GPTLoader
+from .utils import Logging, FileLoader
 import json
+
 class DataGenerator:
     def __init__(self):
         load_dotenv()
         self.API_KEY = os.environ.get('GPT_KEY')
+        self.url = os.environ.get('NAVER_URL')
         self.gpt = GPTLoader(self.API_KEY)
 
-        self.url = os.environ.get('NAVER_URL')
-        self.crawler = Crawler(self.url)
         self.news = ""
-
-        self.data_filename = "../data/dataset.json"
+        self.data_filename = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "data", "dataset.json")
+        
+        self.crawler = Crawler(self.url, self.data_filename)
         self.file_loader = FileLoader()
         self.log = Logging()
 

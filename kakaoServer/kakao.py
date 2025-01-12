@@ -1,9 +1,12 @@
+import sys, os
+sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
+
+from generateData.gen_data.utils import Logging, FileLoader
+from dotenv import load_dotenv, set_key, find_dotenv
 import requests
 import json
-import utils
-from dotenv import load_dotenv, set_key, find_dotenv
-import os
 from datetime import datetime
+
 
 class KakaoLoginMng():
     def __init__(self):
@@ -76,15 +79,15 @@ class KakaoLoginMng():
 class KakaoSendMng():
     def __init__(self):
         load_dotenv()
-        self.f = utils.FileLoader()
-        self.log = utils.Logging()
+        self.f = FileLoader()
+        self.log = Logging()
         self.klm = KakaoLoginMng()
 
         self.send_me_url = "https://kapi.kakao.com/v2/api/talk/memo/default/send"
         self.send_friend_url = "https://kapi.kakao.com/v1/api/talk/friends/message/default/send"
         self.load_friend_url = "https://kapi.kakao.com/v1/api/talk/friends"
         self.token = os.environ.get('KAKAO_ACCESS_TOKEN')
-        self.text = self.f.load_json('../data/dataset.json')
+        self.text = self.f.load_json('../generateData/data/dataset.json')
         self.header = {"Authorization": 'Bearer ' + self.token}
         self.friend_cnt = 0
         self.friend_list = self.load_friend()
@@ -93,12 +96,14 @@ class KakaoSendMng():
         self.send_multi_greeting()
         for i in range(1,cnt+1):
             self.send_msg(i,'me')
-            self.send_msg(i,'friend')
+            #self.send_msg(i,'friend')
 
     def send_multi_greeting(self):
         self.send_greeting_text(0, 'me')
+        """
         for i in range(len(self.friend_list)):
             self.send_greeting_text(i, 'friend')  
+        """
         
 
     def send_msg(self, i, who):

@@ -6,7 +6,7 @@ app = Flask(__name__)
 @app.route('/')
 def hello_world():
     f = fl.FileLoader()
-    d = f.load_json('./data/dataset.json')
+    d = f.load_json('../generateData/data/dataset.json')
     return jsonify(d)
 
 

@@ -1,4 +1,5 @@
 from openai import OpenAI
+import os
 
 class GPTLoader:
     def __init__(self, api_key):
@@ -7,7 +8,8 @@ class GPTLoader:
         self.model = "gpt-4o-mini"
         
     def load_system_rule(self):
-        with open('./systemRule.txt','r', encoding='utf-8') as f:
+        current_dir = os.path.dirname(os.path.abspath(__file__))    
+        with open(os.path.join(current_dir, "systemRule.txt"),'r', encoding='utf-8') as f:
             return f.read()
 
     def run_gpt(self,input):

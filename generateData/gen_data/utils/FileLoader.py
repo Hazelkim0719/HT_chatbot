@@ -1,5 +1,6 @@
 import json
 from datetime import datetime
+
 class FileLoader:
     def __init__(self):
         pass
@@ -29,22 +30,11 @@ class FileLoader:
             result.append(d)
         self.write_json(filename, result)
 
-    def cleanup_file(self):
-        data = self.load_json("../data/dataset.json")
+    def cleanup_file(self, filename):
+        data = self.load_json(filename)
         unique_data = {item['origin']['id']: item for item in data}.values()
         sorted_data = sorted(
             unique_data,
             key=lambda x: datetime.strptime(x['origin']['date'], "%Y-%m-%d %H:%M:%S")
         )
-        self.write_json("../data/dataset.json", sorted_data)
-
-        
-
-class Logging():
-    def __init__(self):
-        pass
-    def log(self, text):
-        now = datetime.now()
-        formatted_time = now.strftime("%Y-%m-%d %H:%M:%S")
-        
-        print(f"[{formatted_time}] {text}")
+        self.write_json(filename, sorted_data)

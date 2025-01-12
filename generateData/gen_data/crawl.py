@@ -1,12 +1,14 @@
 import requests
 from bs4 import BeautifulSoup
-from utils import Logging, FileLoader
+from .utils import Logging, FileLoader
+import os
 
 class Crawler:
-    def __init__(self, naver_url):
+    def __init__(self, naver_url, data_file_path):
         self.log = Logging()
         self.f = FileLoader()
         self.naver_url = naver_url
+        self.data_file_path = data_file_path
         self.news_links = []
         self.news = []
         self.news_ids = []
@@ -40,14 +42,15 @@ class Crawler:
             self.news_ids.append({'article_id':article_id,'office_id':office_id})
 
     def crawl_news(self, news_ids):
-        data = self.f.load_json('../data/dataset.json') 
+        data = self.f.load_json(os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "data", "dataset.json"))
+        url = "https://n.news.naver.com/mnews/article"
         for id in news_ids:
             formatted_id = f"{id['office_id']}_{id['article_id']}"
             if any(item['origin']['id'] == formatted_id for item in data):
                 self.log.log(f"duplication news({id['article_id']})")
             else:   
                 self.log.log(f"crawl news!({id['article_id']})")
-                response = requests.get(f'https://n.news.naver.com/mnews/article/{id["office_id"] }/{id["article_id"]}')
+                response = requests.get(f'{url}/{id["office_id"] }/{id["article_id"]}')
                 soup = BeautifulSoup(response.text, 'html.parser')
                 title = soup.find('h2',"media_end_head_headline").find('span').get_text()
                 article = soup.find('article', 'go_trans _article_content').get_text().replace("\n","")
@@ -58,5 +61,5 @@ class Crawler:
                     'title': title,
                     'article': article,
                     'date': date, 
-                    'url': f'https://n.news.naver.com/mnews/article/{ id["office_id"] }/{id["article_id"]}'
+                    'url': f'{url}/{ id["office_id"] }/{id["article_id"]}'
                 })
