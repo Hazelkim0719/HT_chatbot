@@ -4,6 +4,10 @@
 3. Use chatbot to translate into US slang 
 4. create a service that outputs few news recap tailored to customers 
 
+# Result🎉
+![image](https://github.com/user-attachments/assets/21d1477f-f165-4873-be88-44cafd3c4d8d)
+![image](https://github.com/user-attachments/assets/48c5fe38-73fe-447f-84b4-aa08f472de3d)
+
 # kakao server(gen_Server) 실행 방법  
 ## - 파일 실행 -
 ### 1. docker 설치
