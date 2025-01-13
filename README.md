@@ -5,8 +5,11 @@
 4. create a service that outputs few news recap tailored to customers 
 
 # Result🎉
-![image](https://github.com/user-attachments/assets/21d1477f-f165-4873-be88-44cafd3c4d8d)
 ![image](https://github.com/user-attachments/assets/48c5fe38-73fe-447f-84b4-aa08f472de3d)
+![image](https://github.com/user-attachments/assets/18706a9d-3013-4de0-a802-c0e9a5deb2a4)
+![image](https://github.com/user-attachments/assets/f610e406-d569-42cc-ab5d-8c55811673fa)
+![제목 없음](https://github.com/user-attachments/assets/1f2bbe86-0f06-4112-844f-d9292f490466)
+
 
 # kakao server(gen_Server) 실행 방법  
 ## - 파일 실행 -
