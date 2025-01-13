@@ -7,33 +7,47 @@ from kakao import KakaoSendMng
 import schedule
 import time
 
-def gen_data():
-    data_generator = DataGenerator()
-    data_generator.load_news()
-    data = data_generator.load_gpt(3)
-    data_generator.write_data(data)
-    data_generator.rewrite_gpt_data()
+class schedule_gen_server:
+    def __init__(self):
+        self.log = Logging()
+        self.send_msg_cnt = 5
+        self.load_gpt_cnt = 15
+        self.data_path = '../generateData/data/dataset.json'
 
-def send_kakaotalk():
-    k = KakaoSendMng()
-    k.multi_send(3)
+    def gen_data(self, cnt):
+        data_generator = DataGenerator()
+        f = FileLoader()
+        data_generator.load_news()
+        data = data_generator.load_gpt(cnt)
+        data_generator.write_data(data)
+        data_generator.rewrite_gpt_data()
+        f.cleanup_file(self.data_path)
 
-def schedule_fun():
-    gen_data()
-    send_kakaotalk()
+    def send_kakaotalk(self, cnt):
+        k = KakaoSendMng()
+        k.multi_send(cnt)
 
-def clean_file():
-    f = FileLoader()
-    f.cleanup_file('../generateData/data/dataset.json')
+    def send_kakao_schedule(self):
+        self.gen_data(self.send_msg_cnt)
+        self.send_kakaotalk(self.send_msg_cnt)
+
+    def load_gen_data(self):
+        self.gen_data(self.load_gpt_cnt)
 
 if __name__ == '__main__':
-    
-    schedule.every().day.at("00:00").do(clean_file)
-    time_table = ["08:00", "15:00"]
-    log = Logging()
-    for t in time_table:
-        log.log(f"register schedule {t}")
-        schedule.every().day.at(t).do(schedule_fun)
+    sgs = schedule_gen_server()
+
+    kakao_time_table = ["08:00", "15:00"]
+    load_time_table = ["09:30","11:00","13:30", "16:30", "18:00", "19:30", "21:00"]
+
+    for t in kakao_time_table:
+            sgs.log.log(f"register schedule send kakao({t})")
+            schedule.every().day.at(t).do(sgs.send_kakao_schedule)
+
+    for t in load_time_table:
+            sgs.log.log(f"register schedule load gpt data({t})")
+            schedule.every().day.at(t).do(sgs.load_gen_data)
+
 
     while True:
         schedule.run_pending()

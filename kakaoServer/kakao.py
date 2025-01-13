@@ -47,15 +47,19 @@ class KakaoLoginMng():
             'redirect_uri':self.redirect_uri,
             'code': code
             }
+        
         response = requests.post(self.url, data=data)
         
         tokens = response.json()
+        print(tokens)
+        """
         set_key(self.dotenv_path,'KAKAO_REFRESH_TOKEN',tokens["refresh_token"])
         set_key(self.dotenv_path,'KAKAO_ACCESS_TOKEN',tokens["access_token"])
         return {
             'access_token' : tokens["access_token"],
             'refresh_token' : tokens["refresh_token"]
             }
+        """
 
     def load_access_token(self):
         """access token을 발급 받는 함수\n
@@ -93,15 +97,17 @@ class KakaoSendMng():
         self.friend_list = self.load_friend()
 
     def multi_send(self, cnt):
-        self.send_multi_greeting()
+        #self.send_multi_greeting()
         for i in range(1,cnt+1):
             self.send_msg(i,'me')
-            self.send_msg(i,'friend')
+            #self.send_msg(i,'friend')
 
     def send_multi_greeting(self):
         self.send_greeting_text(0, 'me')
+        
         for i in range(len(self.friend_list)):
             self.send_greeting_text(i, 'friend') 
+        
 
     def send_msg(self, i, who):
         data = self.make_data(self.gen_text(-i), self.gen_link(self.text[-i]["origin"]["url"]), "기사 확인")
@@ -178,8 +184,4 @@ class KakaoSendMng():
         return f"""제목: {self.text[i]["gpt"]["gpt_title"]}\n\
 날짜: {self.text[i]["origin"]["date"]}\n\
 주제: {self.text[i]["gpt"]["gpt_section"]}\n\
-{self.split_abstarct(self.text[i]["gpt"]["gpt_abstract"])}"""
-
-    def split_abstarct(self, text):
-        text = text[:text.find("2.")-1] + "\n" + text[text.find("2."):text.find("3.")-1] + '\n' + text[text.find("3."):]
-        return text
+{'\n'.join(self.text[i]["gpt"]["gpt_abstract"][:3])}"""

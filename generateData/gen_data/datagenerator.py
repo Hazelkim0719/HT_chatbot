@@ -1,11 +1,11 @@
-from dotenv import load_dotenv
 import os
 import time
+import json
 
+from dotenv import load_dotenv
 from .crawl import Crawler
 from .chatgpt import GPTLoader
 from .utils import Logging, FileLoader
-import json
 
 class DataGenerator:
     def __init__(self):
