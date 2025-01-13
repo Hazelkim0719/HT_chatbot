@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import Summary from "./components/dropdown";
+import Dropdown from "./components/dropdown";
 import "./App.css";
+import MenuBar from "./components/menubar";
 function App() {
   const [data, setData] = useState([]);
 
   // API 호출 함수
   const fetchData = async () => {
     try {
-      const response = await axios.get("http://192.168.219.187:5000") // 로컬 API URL
+      const response = await axios.get("http://192.168.219.125:5000") // 로컬 API URL
       const apiData = response.data.reverse(); // API 응답 데이터
       
 
@@ -35,8 +36,8 @@ function App() {
 
   return(
     <div>
-      {/* Content 컴포넌트에 data를 props로 전달 */}
-      <Summary data={data} />
+      <MenuBar/>
+      <Dropdown data={data} />
     </div>
   )
     

@@ -1,20 +1,14 @@
-.content-container {
-    padding: 15px; 
+
+.content-wrapper {
     background-color: #1d1c1c;
+    margin-top: 90px;
+    height: 100%;
+    padding: 0 10px;
     max-width: 100%; /* 화면에 맞게 100% 크기로 조정 */
-    margin: 10px 0; /* 양쪽 여백을 줄이고, 상하 여백만 추가 */
-  }
-  
-  .content-heading {
-    font-size: 24px;
-    font-weight: bold;
-    color: #329967;
-    margin-bottom: 20px;
-    text-align: center;
   }
   
   .content-item {
-    padding: 15px 10px 5px 5px;
+    padding: 5px 10px 10px 5px;
     margin-bottom: 5px;
   }
   

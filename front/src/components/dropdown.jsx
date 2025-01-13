@@ -4,7 +4,7 @@ import Content from './context/content';
 import Title from './context/title';
 import ContentInfo from './context/contentInfo';
 
-function Summary({data}) {
+function Dropdown({data}) {
   const [activeIndex, setActiveIndex] = useState(null);
 
   
@@ -14,9 +14,7 @@ function Summary({data}) {
 
   
   return(
-    <div className="content-container">
-      <h2 className="content-heading">AI 요약 뉴스</h2>
-      <ul>
+      <ul className='content-wrapper'>
         {data.map((item, index) => (
           <li key={index} className="content-item" onClick={() => handleClick(index)}>
             <Title item={item}/>
@@ -27,9 +25,8 @@ function Summary({data}) {
           </li>
         ))}
       </ul>
-    </div>
   )
     
 }
 
-export default Summary
+export default Dropdown

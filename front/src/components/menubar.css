@@ -1,0 +1,55 @@
+
+.content-top{
+  width: 100%;
+  height: 90px;
+  padding: 0px 10px;
+  background-color: #1d1c1c;  /* 공지사항 높이 */
+  top: 0;
+  position: fixed;  /* 화면에 고정 */
+}
+
+.content-heading {
+  font-size: 24px;
+  font-weight: bold;
+  color: #329967;
+  margin-top: 5px;
+  text-align: center;
+}
+
+  /* 공지사항 스타일 */
+.notice-container {
+  width: 100%;
+  height: 50px;  /* 공지사항 높이 */
+  
+  overflow: hidden; /* 넘치는 텍스트는 숨김 처리 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.notice-text-wrapper {
+  display: flex;
+  white-space: nowrap;  /* 텍스트가 한 줄로 표시되도록 설정 */
+  animation: marquee 25s linear infinite;  /* 애니메이션 설정 (15초마다 한 번 반복) */
+  width: fit-content;  /* 텍스트의 너비에 맞춰서 확장 */
+
+}
+
+/* 공지사항 텍스트 스타일 */
+.notice-text {
+  font-size: 15px;  /* 폰트 크기 */
+  color: #adadad;
+  font-weight: bold;  /* 폰트 두께 */
+  margin-right: 400px; /* 공지사항 간 간격 */
+}
+
+
+/* 애니메이션 효과: 텍스트를 왼쪽에서 오른쪽으로 이동 */
+@keyframes marquee {
+  0% {
+    transform: translateX(100%);  /* 텍스트가 화면 밖에 시작 위치 */
+  }
+  100% {
+    transform: translateX(-50%);  /* 텍스트가 화면 밖으로 나가도록 끝 위치 설정 */
+  }
+}
